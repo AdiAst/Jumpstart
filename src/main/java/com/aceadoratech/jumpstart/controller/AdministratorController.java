@@ -14,14 +14,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdministratorController {
     private final ProductService productService;
-    @PostMapping("product")
-    public ResponseEntity<String> addProduct(@RequestBody ProductRequest productRequest){
-        System.out.println(productRequest);
+    @PostMapping("/product")
+    public ResponseEntity<String> addProduct(@RequestBody ProductRequest productRequest) {
+
+        // Add the product using the productService
         productService.addProduct(productRequest);
-        return ResponseEntity.ok().body("Successfully Added New Product");
+
+        // Return a successful response with an OK status code and success message
+        return ResponseEntity.ok().body("Successfully added new product");
     }
-    @GetMapping("product")
-    public List<Product> getAllProduct(){
+
+    @GetMapping("/product")
+    public List<Product> getAllProduct() {
+        // Retrieve all products using the productService
         return productService.getAll();
     }
+
 }
