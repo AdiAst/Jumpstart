@@ -1,5 +1,6 @@
 package com.aceadoratech.jumpstart.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +22,9 @@ public class Transaction {
     private String address;
     private Status status;
     private String date;
-    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL)
-    private List<Product> products;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product products;
 
 }

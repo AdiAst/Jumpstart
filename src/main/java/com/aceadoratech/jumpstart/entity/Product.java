@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -21,8 +23,7 @@ public class Product {
     @Column(length = 3000)
     private String description;
     private float price;
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "transaction_id")
-    private Transaction transaction;
+
+    @OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
+    private List<Transaction> transaction;
 }

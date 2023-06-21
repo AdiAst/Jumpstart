@@ -6,12 +6,14 @@ import com.aceadoratech.jumpstart.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class ProductService {
     private final ProductRepository repository;
 
-    private Product addProduct(ProductRequest productRequest) {
+    public Product addProduct(ProductRequest productRequest) {
         // Perform validation checks on productRequest data here (e.g., null checks, data integrity checks)
         try {
             var product = Product.builder()
@@ -26,5 +28,9 @@ public class ProductService {
             // Handle the exception here (e.g., log the error, perform error-specific handling)
             throw e; // Rethrow the exception if needed
         }
+    }
+
+    public List<Product> getAll(){
+        return repository.findAll();
     }
 }
