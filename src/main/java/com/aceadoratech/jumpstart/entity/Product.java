@@ -23,6 +23,9 @@ public class Product {
     @Column(length = 3000)
     private String description;
     private float price;
+    @Column(unique = true)
+    private String slug;
+    public String picture;
 
     @OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
     private List<Transaction> transaction;

@@ -23,10 +23,10 @@ public class UserLogin implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String firstname;
-    private String lastname;
     private String email;
     private String password;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    UserDetail userDetail;
     @Enumerated(EnumType.STRING)
     private Roles role;
 

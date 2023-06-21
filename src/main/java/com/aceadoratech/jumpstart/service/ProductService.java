@@ -20,6 +20,8 @@ public class ProductService {
                     .name(productRequest.getName())
                     .stock(productRequest.getStock())
                     .price(productRequest.getPrice())
+                    .picture(productRequest.getPicture())
+                    .slug(productRequest.getName().replace(" ", "_").toLowerCase())
                     .description(productRequest.getDescription())
                     .build();
 
