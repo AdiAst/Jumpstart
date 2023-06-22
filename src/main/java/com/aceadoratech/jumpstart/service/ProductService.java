@@ -4,10 +4,12 @@ import com.aceadoratech.jumpstart.entity.Product;
 import com.aceadoratech.jumpstart.exchanges.ProductRequest;
 import com.aceadoratech.jumpstart.repository.ProductRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class ProductService {
@@ -26,13 +28,22 @@ public class ProductService {
                     .build();
 
             return repository.save(product); // Save the product and return the saved Product object
-        } catch (Exception e) {
+        } catch (Exception exception) {
             // Handle the exception here (e.g., log the error, perform error-specific handling)
-            throw e; // Rethrow the exception if needed
+            log.error(exception.getMessage());
+            return null;
         }
     }
 
     public List<Product> getAll(){
         return repository.findAll();
+    }
+
+    public Product getProduct(int id) {
+        return repository.findById(id).get();
+    }
+
+    public List<Product> getProductByQuery(String query) {
+        return repository.findByQuery(query);
     }
 }
