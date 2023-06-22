@@ -20,9 +20,11 @@ public class Product {
     private Integer id;
     private String name;
     private int stock;
+
     @Column(length = 3000)
     private String description;
     private float price;
+
     @Column(unique = true)
     private String slug;
     public String picture;

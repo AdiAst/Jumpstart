@@ -1,15 +1,15 @@
 package com.aceadoratech.jumpstart.controller;
 
+import com.aceadoratech.jumpstart.entity.Transaction;
 import com.aceadoratech.jumpstart.exchanges.TransactionalRequest;
 import com.aceadoratech.jumpstart.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.json.JSONFilter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -18,8 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class BaseController {
     private final TransactionService transactionService;
 
-    @PostMapping("/add-transaction")
-    public ResponseEntity<String> addTransactional(@RequestBody TransactionalRequest transactionalRequest) {
+    @GetMapping("/transactions")
+    public List<Transaction> getTransactions() {
+        return transactionService.getTransactions();
+    }
+
+    @GetMapping("/transaction/{id}")
+    public Transaction getTransaction(@PathVariable int id) {
+        return transactionService.getTransaction(id);
+    }
+
+    @PostMapping("/transaction")
+    public ResponseEntity<String> postTransaction(@RequestBody TransactionalRequest transactionalRequest) {
         // Call the transactionService to create the transaction
         boolean created = transactionService.createTransaction(transactionalRequest);
 
@@ -32,5 +42,4 @@ public class BaseController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create transaction");
         }
     }
-
 }

@@ -7,6 +7,7 @@ import com.aceadoratech.jumpstart.exchanges.TransactionalRequest;
 import com.aceadoratech.jumpstart.repository.ProductRepository;
 import com.aceadoratech.jumpstart.repository.TransactionRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -45,4 +46,11 @@ public class TransactionService {
         }
     }
 
+    public List<Transaction> getTransactions() {
+        return transactionRepository.findAll();
+    }
+
+    public Transaction getTransaction(int id) {
+        return transactionRepository.findById(id).get();
+    }
 }
