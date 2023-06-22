@@ -35,10 +35,6 @@ public class TransactionService {
             // Save the transaction object to the repository (assuming it's a valid repository object)
             transactionRepository.save(transaction);
 
-            Product product = transaction.getProducts();
-            product.getTransaction().add(transaction);
-
-            productRepository.save(product);
 
             return true; // Return true indicating successful transaction creation
         } catch (Exception e) {
@@ -46,11 +42,10 @@ public class TransactionService {
         }
     }
 
-    public List<Transaction> getTransactions() {
-        return transactionRepository.findAll();
-    }
 
     public Transaction getTransaction(int id) {
         return transactionRepository.findById(id).get();
     }
+    public List<Transaction> getAll(){return transactionRepository.findAll();}
+
 }

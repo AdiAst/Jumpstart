@@ -29,6 +29,7 @@ public class Product {
     private String slug;
     public String picture;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
     private List<Transaction> transaction;
 }

@@ -1,8 +1,17 @@
 package com.aceadoratech.jumpstart.controller;
 
+
 import com.aceadoratech.jumpstart.entity.Transaction;
+
+import com.aceadoratech.jumpstart.config.JwtService;
+import com.aceadoratech.jumpstart.entity.Product;
+import com.aceadoratech.jumpstart.entity.UserDetail;
+import com.aceadoratech.jumpstart.entity.UserLogin;
+
 import com.aceadoratech.jumpstart.exchanges.TransactionalRequest;
+import com.aceadoratech.jumpstart.service.ProductService;
 import com.aceadoratech.jumpstart.service.TransactionService;
+import com.aceadoratech.jumpstart.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.json.JSONFilter;
 import org.springframework.http.HttpStatus;
@@ -16,20 +25,19 @@ import java.util.List;
 @RequestMapping("/api/base")
 @RequiredArgsConstructor
 public class BaseController {
+
     private final TransactionService transactionService;
 
-    @GetMapping("/transactions")
-    public List<Transaction> getTransactions() {
-        return transactionService.getTransactions();
-    }
+    
 
-    @GetMapping("/transaction/{id}")
-    public Transaction getTransaction(@PathVariable int id) {
-        return transactionService.getTransaction(id);
-    }
-
+    private final TransactionService transactionService;
+    private final ProductService productService;
+    private final JwtService jwtService;
+    private final UserService userService;
+  
     @PostMapping("/transaction")
     public ResponseEntity<String> postTransaction(@RequestBody TransactionalRequest transactionalRequest) {
+
         // Call the transactionService to create the transaction
         boolean created = transactionService.createTransaction(transactionalRequest);
 
@@ -42,4 +50,20 @@ public class BaseController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create transaction");
         }
     }
+    @GetMapping("/transaction/{id}")
+    public Transaction getTransaction(@PathVariable int id) {
+        return transactionService.getTransaction(id);
+    }
+  
+    @GetMapping("/product")
+    public List<Product> getAllProduct() {
+        // Retrieve all products using the productService
+        return productService.getAll();
+    }
+    @GetMapping("/user/{token}")
+    public UserLogin getSingleUser(@PathVariable String token){
+        String email = jwtService.extractUsername(token);
+        return userService.getSingleUser(email);
+    }
+
 }
