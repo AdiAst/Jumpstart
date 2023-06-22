@@ -39,8 +39,8 @@ public class ProductService {
         return repository.findAll();
     }
 
-    public Product getProduct(int id) {
-        return repository.findById(id).get();
+    public Product getProduct(String slug) {
+        return repository.findBySlug(slug);
     }
 
     public List<Product> getProductByQuery(String query) {

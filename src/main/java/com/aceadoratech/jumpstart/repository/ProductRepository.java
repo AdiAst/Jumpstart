@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query(value = "SELECT * FROM product WHERE " +
-            "name LIKE %:query% AND " +
+            "name LIKE %:query% OR " +
             "description LIKE %:query%", nativeQuery = true)
     List<Product> findByQuery(String query);
+
+    Product findBySlug(String slug);
 }

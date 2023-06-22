@@ -32,22 +32,12 @@ public class AdministratorController {
         return ResponseEntity.ok().body("Successfully added new product");
     }
 
-
-
     @GetMapping("/transaction")
     public List<Transaction> getAllTransaction(){
         // Retrieve all transaction using the transactionService
         return transactionService.getAll();
     }
 
-    @GetMapping("/product/{id}")
-    public Product getProduct(@PathVariable int id) {
-        return productService.getProduct(id);
-    }
 
-    @GetMapping("/product")
-    public List<Product> getProductByQuery(@RequestParam String query) {
-        return productService.getProductByQuery(query);
-    }
 
 }

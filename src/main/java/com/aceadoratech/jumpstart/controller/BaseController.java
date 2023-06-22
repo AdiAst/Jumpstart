@@ -28,9 +28,6 @@ public class BaseController {
 
     private final TransactionService transactionService;
 
-    
-
-    private final TransactionService transactionService;
     private final ProductService productService;
     private final JwtService jwtService;
     private final UserService userService;
@@ -65,5 +62,13 @@ public class BaseController {
         String email = jwtService.extractUsername(token);
         return userService.getSingleUser(email);
     }
+    @GetMapping("/product/{slug}")
+    public Product getProduct(@PathVariable String slug) {
+        return productService.getProduct(slug);
+    }
 
+    @GetMapping("/products")
+    public List<Product> getProductByQuery(@RequestParam String query) {
+        return productService.getProductByQuery(query);
+    }
 }
