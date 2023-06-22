@@ -1,8 +1,10 @@
 package com.aceadoratech.jumpstart.controller;
 
 import com.aceadoratech.jumpstart.entity.Product;
+import com.aceadoratech.jumpstart.entity.Transaction;
 import com.aceadoratech.jumpstart.exchanges.ProductRequest;
 import com.aceadoratech.jumpstart.service.ProductService;
+import com.aceadoratech.jumpstart.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdministratorController {
     private final ProductService productService;
+    private final TransactionService transactionService;
     @PostMapping("/product")
     public ResponseEntity<String> addProduct(@RequestBody ProductRequest productRequest) {
 
@@ -24,10 +27,11 @@ public class AdministratorController {
         return ResponseEntity.ok().body("Successfully added new product");
     }
 
-    @GetMapping("/product")
-    public List<Product> getAllProduct() {
-        // Retrieve all products using the productService
-        return productService.getAll();
+
+    @GetMapping("/transaction")
+    public List<Transaction> getAllTransaction(){
+        // Retrieve all transaction using the transactionService
+        return transactionService.getAll();
     }
 
 }

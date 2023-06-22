@@ -22,7 +22,7 @@ public class Transaction {
     private String address;
     private Status status;
     private String date;
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product products;
