@@ -42,11 +42,12 @@ public class AdministratorController {
     }
     // Retail  ==================================================
     @PostMapping("/retail-regions")
-    public RetailRegion addRetailRegion(@RequestBody RetailRegion retailRegion) {
-        return retailRegionService.addRetailRegion(retailRegion);
+    public ResponseEntity<String> addRetailRegion(@RequestBody RetailRegion retailRegion) {
+        retailRegionService.addRetailRegion(retailRegion);
+        return ResponseEntity.ok().body("Successfully Create a Retail Region");
     }
     @PostMapping("/retail-regions/product")
-    public RetailRegionProduct addProductToRetailRegion(
+    public ResponseEntity<String> addProductToRetailRegion(
             @RequestBody RetailProductRequest retailProductRequest
             ) {
         RetailRegion retailRegion = retailRegionService.findById(retailProductRequest.getRetailId());
@@ -54,7 +55,8 @@ public class AdministratorController {
         RetailRegionProduct retailRegionProduct = new RetailRegionProduct();
         retailRegionProduct.setRetailRegion(retailRegion);
         retailRegionProduct.setProduct(product);
-        return retailRegionService.addProductToRetailRegion(retailRegionProduct);
+        retailRegionService.addProductToRetailRegion(retailRegionProduct);
+        return ResponseEntity.ok().body("Successfully add product to retail region");
     }
 
 
