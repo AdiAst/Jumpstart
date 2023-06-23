@@ -20,7 +20,6 @@ public class ProductService {
         try {
             var product = Product.builder()
                     .name(productRequest.getName())
-                    .stock(productRequest.getStock())
                     .price(productRequest.getPrice())
                     .picture(productRequest.getPicture())
                     .slug(productRequest.getName().replace(" ", "_").toLowerCase())
@@ -42,7 +41,7 @@ public class ProductService {
     public Product getProduct(String slug) {
         return repository.findBySlug(slug);
     }
-
+    public Product getProduct(Integer id){return repository.findById(id).get();}
     public List<Product> getProductByQuery(String query) {
         return repository.findByQuery(query);
     }

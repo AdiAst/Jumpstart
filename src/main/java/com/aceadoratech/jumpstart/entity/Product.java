@@ -19,7 +19,6 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private int stock;
 
     @Column(length = 3000)
     private String description;
