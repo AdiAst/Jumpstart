@@ -20,9 +20,13 @@ import java.util.List;
 @RequestMapping("/api/admin")
 @RequiredArgsConstructor
 public class AdministratorController {
+
+    // services ==================================================
     private final ProductService productService;
     private final RetailRegionService retailRegionService;
     private final TransactionService transactionService;
+
+    // products ==================================================
     @PostMapping("/product")
     public ResponseEntity<String> addProduct(@RequestBody ProductRequest productRequest) {
 
@@ -36,11 +40,12 @@ public class AdministratorController {
         // Return a successful response with an OK status code and success message
         return ResponseEntity.ok().body("Successfully added new product");
     }
+
     @PostMapping("/retail-regions")
     public RetailRegion addRetailRegion(@RequestBody RetailRegion retailRegion) {
         return retailRegionService.addRetailRegion(retailRegion);
     }
-    @PostMapping("/retail-regions")
+    @PostMapping("/retail-regions/product")
     public RetailRegionProduct addProductToRetailRegion(
             @RequestBody RetailProductRequest retailProductRequest
             ) {
@@ -51,16 +56,20 @@ public class AdministratorController {
         retailRegionProduct.setProduct(product);
         return retailRegionService.addProductToRetailRegion(retailRegionProduct);
     }
+
+
+    // transactions ==================================================
+
     @GetMapping("/transaction")
     public List<Transaction> getAllTransaction(){
         // Retrieve all transaction using the transactionService
         return transactionService.getAll();
     }
 
+
     @GetMapping("/retail-regions/{retailRegionId}/products")
     public List<RetailRegionProduct> getProductsByRetailRegionId(@PathVariable Long retailRegionId) {
         return retailRegionService.getProductsByRetailRegionId(retailRegionId);
     }
-
 
 }
