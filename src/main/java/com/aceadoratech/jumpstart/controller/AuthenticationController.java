@@ -15,11 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/base/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
+
+    // services ==================================================
     private final AuthenticationService service;
+
+    // users ==================================================
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest registerRequest){
         return ResponseEntity.ok(service.register(registerRequest));
     }
+
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody AuthenticationRequest authRequest){
         return ResponseEntity.ok(service.authenticate(authRequest));

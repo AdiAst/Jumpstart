@@ -16,8 +16,12 @@ import java.util.List;
 @RequestMapping("/api/admin")
 @RequiredArgsConstructor
 public class AdministratorController {
+
+    // services ==================================================
     private final ProductService productService;
     private final TransactionService transactionService;
+
+    // products ==================================================
     @PostMapping("/product")
     public ResponseEntity<String> addProduct(@RequestBody ProductRequest productRequest) {
 
@@ -32,12 +36,10 @@ public class AdministratorController {
         return ResponseEntity.ok().body("Successfully added new product");
     }
 
+    // transactions ==================================================
     @GetMapping("/transaction")
     public List<Transaction> getAllTransaction(){
         // Retrieve all transaction using the transactionService
         return transactionService.getAll();
     }
-
-
-
 }

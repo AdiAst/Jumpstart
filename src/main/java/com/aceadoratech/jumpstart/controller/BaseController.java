@@ -13,6 +13,7 @@ import com.aceadoratech.jumpstart.service.ProductService;
 import com.aceadoratech.jumpstart.service.TransactionService;
 import com.aceadoratech.jumpstart.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.apache.tomcat.util.json.JSONFilter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,12 +27,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BaseController {
 
+    // services ==================================================
     private final TransactionService transactionService;
-
     private final ProductService productService;
     private final JwtService jwtService;
     private final UserService userService;
-  
+
+    // transactions ==================================================
     @PostMapping("/transaction")
     public ResponseEntity<String> postTransaction(@RequestBody TransactionalRequest transactionalRequest) {
 
@@ -51,17 +53,14 @@ public class BaseController {
     public Transaction getTransaction(@PathVariable int id) {
         return transactionService.getTransaction(id);
     }
-  
+
+    // products ==================================================
     @GetMapping("/product")
     public List<Product> getAllProduct() {
         // Retrieve all products using the productService
         return productService.getAll();
     }
-    @GetMapping("/user/{token}")
-    public UserLogin getSingleUser(@PathVariable String token){
-        String email = jwtService.extractUsername(token);
-        return userService.getSingleUser(email);
-    }
+
     @GetMapping("/product/{slug}")
     public Product getProduct(@PathVariable String slug) {
         return productService.getProduct(slug);
@@ -70,5 +69,17 @@ public class BaseController {
     @GetMapping("/products")
     public List<Product> getProductByQuery(@RequestParam String query) {
         return productService.getProductByQuery(query);
+    }
+
+    // users ==================================================
+    @GetMapping("/user/{token}")
+    public UserLogin getSingleUser(@PathVariable String token){
+        String email = jwtService.extractUsername(token);
+        return userService.getSingleUser(email);
+    }
+
+    @PostMapping("/user/profile")
+    public UserDetail postUpdateProfile(@RequestBody UserDetail userDetail) {
+        return userService.updateUser(userDetail);
     }
 }

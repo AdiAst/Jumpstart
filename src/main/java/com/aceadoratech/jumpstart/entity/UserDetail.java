@@ -22,6 +22,7 @@ public class UserDetail {
     private String address;
     private int age;
     private String gender;
+
     @JsonIgnore
     @OneToOne
     @JoinColumn(name = "user_id")
