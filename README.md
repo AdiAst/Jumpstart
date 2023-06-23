@@ -142,10 +142,33 @@
 ```
 
 ## Update User Profile
-**Endpoint:** 
+**Endpoint:** `(POST) /api/base/user/profile` 
 **Request Body:**
+```json
+{
+    "id": "1",	
+    "email": "example@mail.com",	
+    "password": "secretPasswordQ@[~!",
+    "firstname": "Example",
+    "lastname": "Example",
+    "age": "78",
+    "address": "Bali, Indonesia",
+    "gender": "Male"
+}
+```
 **Response:**
-
+```json
+{
+    "id": "1",	
+    "email": "example@mail.com",	
+    "password": "secretPasswordQ@[~!",
+    "firstname": "Example",
+    "lastname": "Example",
+    "age": "78",
+    "address": "Bali, Indonesia",
+    "gender": "Male"
+}
+```
 
 ## Register
 **Endpoint:** `(POST) /api/base/auth/register`
