@@ -1,6 +1,6 @@
 # API Documentation
-- [UnAuthorized Endpoints](https://github.com/Clouza/Jumpstart-API#Unauthorized-endpoints-(without-jwt))
-- [Authorized Endpoints](https://github.com/Clouza/Jumpstart-API#authorized-endpoints-(with-jwt))
+- [UnAuthorized Endpoints](https://github.com/Clouza/Jumpstart-API#unauthorized-endpoints-without-jwt)
+- [Authorized Endpoints](https://github.com/Clouza/Jumpstart-API#authorized-endpoints-with-jwt)
 
 # UnAuthorized Endpoints (without JWT)
 **Endpoint List**
