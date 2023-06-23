@@ -1,6 +1,18 @@
 # API Documentation
+- [UnAuthorized Endpoints](https://github.com/Clouza/Jumpstart-API#unauthorized-endpoints-without-jwt)
+- [Authorized Endpoints](https://github.com/Clouza/Jumpstart-API#authorized-endpoints-with-jwt)
 
-# Endpoints that don't require authentication
+# UnAuthorized Endpoints (without JWT)
+**Endpoint List**
+- [Buy a Product](https://github.com/Clouza/Jumpstart-API#buy-a-product)
+- [Get Single Transaction Data](https://github.com/Clouza/Jumpstart-API#get-single-transaction-data)
+- [Get All Products](https://github.com/Clouza/Jumpstart-API#get-all-products)
+- [Get Single Products](https://github.com/Clouza/Jumpstart-API#get-single-product)
+- [Search Products](https://github.com/Clouza/Jumpstart-API#search-products)
+- [Get Single User](https://github.com/Clouza/Jumpstart-API#get-single-user)
+- [Update User Profile](https://github.com/Clouza/Jumpstart-API#update-user-profile)
+- [Register](https://github.com/Clouza/Jumpstart-API#update-user-profile)
+- [Login](https://github.com/Clouza/Jumpstart-API#login)
 
 ## Buy a Product
 **Endpoint:** `(POST) /api/base/transaction`
@@ -130,10 +142,33 @@
 ```
 
 ## Update User Profile
-**Endpoint:** 
+**Endpoint:** `(POST) /api/base/user/profile` 
 **Request Body:**
+```json
+{
+    "id": "1",	
+    "email": "example@mail.com",	
+    "password": "secretPasswordQ@[~!",
+    "firstname": "Example",
+    "lastname": "Example",
+    "age": "78",
+    "address": "Bali, Indonesia",
+    "gender": "Male"
+}
+```
 **Response:**
-
+```json
+{
+    "id": "1",	
+    "email": "example@mail.com",	
+    "password": "secretPasswordQ@[~!",
+    "firstname": "Example",
+    "lastname": "Example",
+    "age": "78",
+    "address": "Bali, Indonesia",
+    "gender": "Male"
+}
+```
 
 ## Register
 **Endpoint:** `(POST) /api/base/auth/register`
@@ -169,7 +204,13 @@
 }
 ```
 
-# Endpoints that require authentication
+# Authorized Endpoints (with JWT)
+**Endpoint List**
+- [Add a New Retail Region](https://github.com/Clouza/Jumpstart-API#add-a-new-retail-region)
+- [Add Product to Retail Region](https://github.com/Clouza/Jumpstart-API#add-product-to-retail-region)
+- [Add a Product](https://github.com/Clouza/Jumpstart-API#add-a-product)
+- [Get All Transactions](https://github.com/Clouza/Jumpstart-API#get-all-transactions)
+- [Get All Products based on their Retail Region](https://github.com/Clouza/Jumpstart-API#get-all-products-based-on-their-retail-region)
 
 ## Add a New Retail Region
 **Endpoint:** `(POST) /api/admin/retail-regions`
