@@ -40,7 +40,7 @@ public class AdministratorController {
         // Return a successful response with an OK status code and success message
         return ResponseEntity.ok().body("Successfully added new product");
     }
-
+    // Retail  ==================================================
     @PostMapping("/retail-regions")
     public RetailRegion addRetailRegion(@RequestBody RetailRegion retailRegion) {
         return retailRegionService.addRetailRegion(retailRegion);
