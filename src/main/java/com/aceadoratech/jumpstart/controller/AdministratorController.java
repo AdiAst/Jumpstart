@@ -57,10 +57,15 @@ public class AdministratorController {
     }
 
 
-    // retails  ==================================================
-    @GetMapping("/retails")
+    // retail regions  ==================================================
+    @GetMapping("/retail-regions")
     public List<RetailRegion> getRetails() {
         return retailRegionService.getRetails();
+    }
+
+    @GetMapping("/retail-regions/{id}")
+    public RetailRegion getRetail(@PathVariable Integer id) {
+        return retailRegionService.getRetail(id);
     }
 
     @PostMapping("/retail-regions")
@@ -69,6 +74,20 @@ public class AdministratorController {
         return ResponseEntity.ok().body("Successfully Create a Retail Region");
     }
 
+    // update retail regions
+    @PutMapping("/retail-regions")
+    public ResponseEntity<?> updateRetailRegions(@RequestBody RetailRegion retailRegion) {
+        retailRegionService.updateRetail(retailRegion);
+        return ResponseEntity.ok("Retail regions updated");
+    }
+
+    @DeleteMapping("/retail-regions/{id}")
+    public ResponseEntity<?> deleteRetailRegions(@PathVariable Integer id) {
+        retailRegionService.deleteRetail(id);
+        return ResponseEntity.ok("Retail regions deleted");
+    }
+
+    // retail regions products ==================================================
     @PostMapping("/retail-regions/product")
     public ResponseEntity<String> addProductToRetailRegion(@RequestBody RetailProductRequest retailProductRequest) {
         RetailRegion retailRegion = retailRegionService.findById(retailProductRequest.getRetailId());
@@ -84,6 +103,19 @@ public class AdministratorController {
     @GetMapping("/retail-regions/{retailRegionId}/products")
     public List<RetailRegionProduct> getProductsByRetailRegionId(@PathVariable Long retailRegionId) {
         return retailRegionService.getProductsByRetailRegionId(retailRegionId);
+    }
+
+    // update retail products
+    @PutMapping("/retail-regions/product")
+    public ResponseEntity<?> updateRetailProducts(@RequestBody RetailRegionProduct retailRegionProduct) {
+        retailRegionService.updateProduct(retailRegionProduct);
+        return ResponseEntity.ok("Product updated");
+    }
+
+    @DeleteMapping("/retail-regions/product/{id}")
+    public ResponseEntity<?> deleteRetailProducts(@PathVariable Integer id) {
+        retailRegionService.deleteProduct(id);
+        return ResponseEntity.ok("Product deleted");
     }
 
     // transactions ==================================================

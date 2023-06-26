@@ -33,4 +33,30 @@ public class RetailRegionService {
     public List<RetailRegion> getRetails() {
         return retailRegionRepository.findAll();
     }
+
+    public RetailRegion getRetail(Integer id) {
+        return retailRegionRepository.findById(id).get();
+    }
+
+    public void updateRetail(RetailRegion rr) {
+        RetailRegion retailRegion = retailRegionRepository.findById(rr.getId()).get();
+        retailRegion.setName(rr.getName());
+        retailRegion.setLocation(rr.getLocation());
+        retailRegionRepository.save(retailRegion);
+    }
+
+    public void deleteRetail(Integer id) {
+        retailRegionRepository.deleteById(id);
+    }
+
+    public void updateProduct(RetailRegionProduct rrp) {
+        RetailRegionProduct retailRegionProduct = retailRegionProductRepository.findById(rrp.getId()).get();
+        retailRegionProduct.setProduct(rrp.getProduct());
+        retailRegionProduct.setStock(rrp.getStock());
+        retailRegionProduct.setRetailRegion(rrp.getRetailRegion());
+    }
+
+    public void deleteProduct(Integer id) {
+        retailRegionProductRepository.deleteById(id);
+    }
 }
