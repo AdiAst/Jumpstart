@@ -21,14 +21,7 @@
 {
     "customerName":"Miles",
     "address":"Example Street",
-    "product":{
-        "id": 1,
-        "name": "table Super Mahal enak tedan tdr 1000",
-        "description": "Lorem Ipsum",
-        "price": 37.6,
-        "slug": "table_super_mahal_enak_tedan_tdr_1000",
-        "picture": "ambasing.png"
-    }
+    "retailRegionProductId":1
     
 }
 ```
@@ -81,7 +74,7 @@
 ```
 
 ## Get Single Product
-**Endpoint:** `(GET) /api/base/product/{slug}
+**Endpoint:** `(GET) /api/base/product/{slug}`
 **Response:**
 ```json
 {
@@ -316,3 +309,7 @@
     }
 ]
 ```
+## Approve Transaction
+**Endpoint:** `(GET) /api/admin/transaction/approve/{transactionId}`
+**Response:**
+`Successfully approve a product`

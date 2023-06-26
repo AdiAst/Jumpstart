@@ -12,13 +12,18 @@ import com.aceadoratech.jumpstart.exchanges.TransactionalRequest;
 import com.aceadoratech.jumpstart.service.ProductService;
 import com.aceadoratech.jumpstart.service.TransactionService;
 import com.aceadoratech.jumpstart.service.UserService;
+import com.aceadoratech.jumpstart.utils.FilesHandler;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.apache.tomcat.util.json.JSONFilter;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -32,6 +37,7 @@ public class BaseController {
     private final ProductService productService;
     private final JwtService jwtService;
     private final UserService userService;
+    private final FilesHandler filesHandler;
 
     // transactions ==================================================
     @PostMapping("/transaction")
@@ -81,5 +87,11 @@ public class BaseController {
     @PostMapping("/user/profile")
     public UserDetail postUpdateProfile(@RequestBody UserDetail userDetail) {
         return userService.updateUser(userDetail);
+    }
+    // image ==================================================
+
+    @GetMapping("/product/image/{imageName}")
+    public Resource getProductImage(@PathVariable String imageName) {
+        return FilesHandler.getFile(imageName);
     }
 }

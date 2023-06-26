@@ -55,10 +55,6 @@ public class AdministratorController {
         return ResponseEntity.ok().body("Image added to storage");
     }
 
-    @GetMapping("/product/image/{imageName}")
-    public Resource getProductImage(@RequestParam String imageName) {
-        return FilesHandler.getFile(imageName);
-    }
 
     // retails  ==================================================
     @PostMapping("/retail-regions")
@@ -68,14 +64,13 @@ public class AdministratorController {
     }
 
     @PostMapping("/retail-regions/product")
-    public ResponseEntity<String> addProductToRetailRegion(
-            @RequestBody RetailProductRequest retailProductRequest
-            ) {
+    public ResponseEntity<String> addProductToRetailRegion(@RequestBody RetailProductRequest retailProductRequest) {
         RetailRegion retailRegion = retailRegionService.findById(retailProductRequest.getRetailId());
         Product product = productService.getProduct(retailProductRequest.getProductId());
         RetailRegionProduct retailRegionProduct = new RetailRegionProduct();
         retailRegionProduct.setRetailRegion(retailRegion);
         retailRegionProduct.setProduct(product);
+        retailRegionProduct.setStock(retailProductRequest.getStock());
         retailRegionService.addProductToRetailRegion(retailRegionProduct);
         return ResponseEntity.ok().body("Successfully add product to retail region");
     }
@@ -90,6 +85,11 @@ public class AdministratorController {
     public List<Transaction> getAllTransaction(){
         // Retrieve all transaction using the transactionService
         return transactionService.getAll();
+    }
+    @PostMapping("/transaction/approve/{id}")
+    public ResponseEntity<String> approveTransaction(@PathVariable Integer id){
+        transactionService.approveTransaction(id);
+        return ResponseEntity.ok().body("Successfully approve a product");
     }
 
 }

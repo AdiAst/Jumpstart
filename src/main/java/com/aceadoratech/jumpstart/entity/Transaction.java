@@ -22,9 +22,8 @@ public class Transaction {
     private String address;
     private Status status;
     private String date;
-
     @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product products;
+    @JoinColumn(name="retail_id")
+    private RetailRegionProduct retailRegionProduct;
 
 }

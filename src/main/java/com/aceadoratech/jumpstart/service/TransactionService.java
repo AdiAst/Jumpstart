@@ -1,12 +1,14 @@
 package com.aceadoratech.jumpstart.service;
 
-import com.aceadoratech.jumpstart.entity.Product;
-import com.aceadoratech.jumpstart.entity.Status;
-import com.aceadoratech.jumpstart.entity.Transaction;
+import com.aceadoratech.jumpstart.entity.*;
 import com.aceadoratech.jumpstart.exchanges.TransactionalRequest;
 import com.aceadoratech.jumpstart.repository.ProductRepository;
+import com.aceadoratech.jumpstart.repository.RetailRegionProductRepository;
+import com.aceadoratech.jumpstart.repository.RetailRegionRepository;
 import com.aceadoratech.jumpstart.repository.TransactionRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,8 @@ public class TransactionService {
 
     private final TransactionRepository transactionRepository;
     private final ProductRepository productRepository;
+    private final RetailRegionRepository retailRegionRepository;
+    private final RetailRegionProductRepository retailRegionProductRepository;
 
     public boolean createTransaction(TransactionalRequest transactionalRequest) {
         try {
@@ -29,7 +33,7 @@ public class TransactionService {
                     .address(transactionalRequest.getAddress())
                     .status(Status.PENDING)
                     .date(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime()))
-                    .products(transactionalRequest.getProduct())
+                    .retailRegionProduct(retailRegionProductRepository.findById(transactionalRequest.getRetailRegionProductId()).get())
                     .build();
 
             // Save the transaction object to the repository (assuming it's a valid repository object)
@@ -41,7 +45,20 @@ public class TransactionService {
             throw e; // Rethrow the exception for error handling/logging purposes
         }
     }
-
+    public boolean approveTransaction(Integer id) {
+        Transaction transaction = transactionRepository.findById(id).get();
+        RetailRegionProduct retailRegionProduct = transaction.getRetailRegionProduct();
+        if (retailRegionProduct != null && transaction != null) {
+            retailRegionProduct.setStock(retailRegionProduct.getStock() - 1);
+            transaction.setStatus(Status.DONE);
+            retailRegionProductRepository.save(retailRegionProduct);
+            transactionRepository.save(transaction);
+            return true;
+        } else {
+            // Handle case when the retailRegionProduct is not found
+            return false;
+        }
+    }
 
     public Transaction getTransaction(int id) {
         return transactionRepository.findById(id).get();
