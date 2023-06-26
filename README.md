@@ -237,7 +237,6 @@
 {
     "name":"chair Super Mahal enak tedan tdr 1000",
     "picture":"ambasing.png",
-    "stock":200,
     "description": "Lorem Ipsum",
     "price":37.6
 }
@@ -313,3 +312,23 @@
 **Endpoint:** `(GET) /api/admin/transaction/approve/{transactionId}`
 **Response:**
 `Successfully approve a product`
+
+## Update a Product
+**Endpoint:** `(PUT) /api/admin/product`
+**Request Body:**
+```json
+{
+  "id": 1,
+  "name": "Wood Table",
+  "description": "Lorem Ipsum",
+  "price": 49.9,
+  "picture": "wc.png"
+}
+```
+**Response:**
+`Successfully update product`
+
+## Delete a Product
+**Endpoint:** `(PUT) /api/admin/product/{id}`
+**Response:**
+`Successfully delete product`

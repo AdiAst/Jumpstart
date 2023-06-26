@@ -33,4 +33,6 @@ public class RetailRegionService {
     public List<RetailRegion> getRetails() {
         return retailRegionRepository.findAll();
     }
+
+
 }

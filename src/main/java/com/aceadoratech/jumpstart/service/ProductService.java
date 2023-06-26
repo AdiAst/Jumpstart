@@ -15,10 +15,11 @@ import java.util.List;
 public class ProductService {
     private final ProductRepository repository;
 
-    public Product addProduct(ProductRequest productRequest) {
+    public Product addProduct(Product productRequest) {
         // Perform validation checks on productRequest data here (e.g., null checks, data integrity checks)
         try {
             var product = Product.builder()
+                    .id(productRequest.getId())
                     .name(productRequest.getName())
                     .price(productRequest.getPrice())
                     .picture(productRequest.getPicture())
@@ -37,7 +38,7 @@ public class ProductService {
     public List<Product> getAll(){
         return repository.findAll();
     }
-
+    public boolean deleteProduct(Integer id){repository.deleteById(id);return true;}
     public Product getProduct(String slug) {
         return repository.findBySlug(slug);
     }

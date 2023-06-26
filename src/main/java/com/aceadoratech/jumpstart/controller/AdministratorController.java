@@ -35,7 +35,7 @@ public class AdministratorController {
 
     // products ==================================================
     @PostMapping("/product")
-    public ResponseEntity<String> addProduct(@RequestBody ProductRequest productRequest) {
+    public ResponseEntity<String> addProduct(@RequestBody Product productRequest) {
         // add the product using the productService
         Product product = productService.addProduct(productRequest);
         if(product == null)
@@ -43,6 +43,21 @@ public class AdministratorController {
 
         // return a successful response with an OK status code and success message
         return ResponseEntity.ok().body("Successfully added new product");
+    }
+    @PutMapping("/product")
+    public ResponseEntity<String> updateProduct(@RequestBody Product productRequest) {
+        // add the product using the productService
+        Product product = productService.addProduct(productRequest);
+        if(product == null)
+            return new ResponseEntity<>(String.format("'%s' is exists", productRequest.getName()), HttpStatus.NOT_ACCEPTABLE);
+
+        // return a successful response with an OK status code and success message
+        return ResponseEntity.ok().body("Successfully update new product");
+    }
+    @DeleteMapping("/product/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable Integer id){
+        productService.deleteProduct(id);
+        return ResponseEntity.ok().body("Successfully delete product");
     }
 
     @PostMapping("/product/image")
@@ -97,4 +112,5 @@ public class AdministratorController {
         transactionService.approveTransaction(id);
         return ResponseEntity.ok().body("Successfully approve a product");
     }
+
 }
