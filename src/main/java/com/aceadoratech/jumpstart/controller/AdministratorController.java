@@ -57,6 +57,11 @@ public class AdministratorController {
 
 
     // retails  ==================================================
+    @GetMapping("/retails")
+    public List<RetailRegion> getRetails() {
+        return retailRegionService.getRetails();
+    }
+
     @PostMapping("/retail-regions")
     public ResponseEntity<String> addRetailRegion(@RequestBody RetailRegion retailRegion) {
         retailRegionService.addRetailRegion(retailRegion);
@@ -91,5 +96,4 @@ public class AdministratorController {
         transactionService.approveTransaction(id);
         return ResponseEntity.ok().body("Successfully approve a product");
     }
-
 }

@@ -21,9 +21,10 @@ public class Transaction {
     private String customerName;
     private String address;
     private Status status;
+    private String total;
     private String date;
+
     @ManyToOne
     @JoinColumn(name="retail_id")
     private RetailRegionProduct retailRegionProduct;
-
 }

@@ -14,16 +14,23 @@ import java.util.List;
 public class RetailRegionService {
     private final RetailRegionProductRepository retailRegionProductRepository;
     private final RetailRegionRepository retailRegionRepository;
+
     public List<RetailRegionProduct> getProductsByRetailRegionId(Long retailRegionId) {
         return retailRegionProductRepository.findByRetailRegionId(retailRegionId);
     }
+
     public RetailRegionProduct addProductToRetailRegion(RetailRegionProduct retailRegionProduct) {
         return retailRegionProductRepository.save(retailRegionProduct);
     }
     public RetailRegion findById(Integer id){
         return retailRegionRepository.findById(id).get();
     }
+
     public RetailRegion addRetailRegion(RetailRegion retailRegion) {
         return retailRegionRepository.save(retailRegion);
+    }
+
+    public List<RetailRegion> getRetails() {
+        return retailRegionRepository.findAll();
     }
 }

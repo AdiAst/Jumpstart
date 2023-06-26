@@ -29,5 +29,4 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> register(@RequestBody AuthenticationRequest authRequest){
         return ResponseEntity.ok(service.authenticate(authRequest));
     }
-
 }

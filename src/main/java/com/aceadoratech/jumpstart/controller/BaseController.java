@@ -55,6 +55,7 @@ public class BaseController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create transaction");
         }
     }
+
     @GetMapping("/transaction/{id}")
     public Transaction getTransaction(@PathVariable int id) {
         return transactionService.getTransaction(id);
@@ -88,8 +89,8 @@ public class BaseController {
     public UserDetail postUpdateProfile(@RequestBody UserDetail userDetail) {
         return userService.updateUser(userDetail);
     }
-    // image ==================================================
 
+    // image ==================================================
     @GetMapping("/product/image/{imageName}")
     public Resource getProductImage(@PathVariable String imageName) {
         return FilesHandler.getFile(imageName);
