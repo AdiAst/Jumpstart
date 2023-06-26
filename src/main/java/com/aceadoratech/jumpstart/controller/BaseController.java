@@ -29,6 +29,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/base")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RequiredArgsConstructor
 public class BaseController {
 

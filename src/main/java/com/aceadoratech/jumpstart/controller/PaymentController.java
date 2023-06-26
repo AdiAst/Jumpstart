@@ -18,6 +18,7 @@ import java.io.IOException;
 @Slf4j
 @RestController
 @RequestMapping("/api/payment")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RequiredArgsConstructor
 public class PaymentController {
     // services ==================================================
