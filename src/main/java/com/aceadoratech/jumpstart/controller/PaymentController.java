@@ -20,10 +20,12 @@ import java.io.IOException;
 @RequestMapping("/api/payment")
 @RequiredArgsConstructor
 public class PaymentController {
+    // services ==================================================
     private TransactionService transactionService;
     private PaymentService paymentService;
     private final String BASE_URL = "http://localhost:8080/api/payment";
 
+    // payments ==================================================
     @PostMapping("/pay")
     public ResponseEntity<?> postPayment(@RequestBody PaymentRequest pay) {
         try {
