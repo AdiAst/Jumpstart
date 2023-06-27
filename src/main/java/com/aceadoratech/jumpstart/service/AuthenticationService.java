@@ -26,7 +26,7 @@ public class AuthenticationService {
         var user = UserLogin.builder()
                 .email(registerRequest.getEmail())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
-                .role(Roles.ADMIN)
+                .role(Roles.CUSTOMER)
                 .build();
         userLoginRepository.save(user);
         var detail = UserDetail.builder()

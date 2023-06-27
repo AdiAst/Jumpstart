@@ -175,11 +175,7 @@
 }
 ```
 **Response:**
-```
-{
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJibnV5QGdtYWlsLmNvbSIsImlhdCI6MTY4NzQ5MjkxNiwiZXhwIjoxNjg3NTc5MzE2fQ.qj0NPMyTmlJn-L-6LTwShVOIOalQWvhGDFFos3YDwPc"
-}
-```
+`Successfully Register`
 
 ## Login
 **Endpoint:** `(POST) /api/base/auth/authenticate`
