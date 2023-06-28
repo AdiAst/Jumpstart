@@ -36,6 +36,7 @@ public class AdministratorController {
     // products ==================================================
     @PostMapping("/product")
     public ResponseEntity<String> addProduct(@RequestBody Product productRequest) {
+        System.out.println(productRequest);
         // add the product using the productService
         Product product = productService.addProduct(productRequest);
         if(product == null)
@@ -43,6 +44,10 @@ public class AdministratorController {
 
         // return a successful response with an OK status code and success message
         return ResponseEntity.ok().body("Successfully added new product");
+    }
+    @GetMapping("/konyot")
+    public ResponseEntity<String> a(){
+        return ResponseEntity.ok().body("aasdkasdnakndsn");
     }
     @PutMapping("/product")
     public ResponseEntity<String> updateProduct(@RequestBody Product productRequest) {
