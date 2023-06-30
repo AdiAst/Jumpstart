@@ -1,15 +1,13 @@
 package com.aceadoratech.jumpstart.controller;
 
 
-import com.aceadoratech.jumpstart.entity.Transaction;
+import com.aceadoratech.jumpstart.entity.*;
 
 import com.aceadoratech.jumpstart.config.JwtService;
-import com.aceadoratech.jumpstart.entity.Product;
-import com.aceadoratech.jumpstart.entity.UserDetail;
-import com.aceadoratech.jumpstart.entity.UserLogin;
 
 import com.aceadoratech.jumpstart.exchanges.TransactionalRequest;
 import com.aceadoratech.jumpstart.service.ProductService;
+import com.aceadoratech.jumpstart.service.RetailRegionService;
 import com.aceadoratech.jumpstart.service.TransactionService;
 import com.aceadoratech.jumpstart.service.UserService;
 import com.aceadoratech.jumpstart.utils.FilesHandler;
@@ -38,6 +36,7 @@ public class BaseController {
     private final ProductService productService;
     private final JwtService jwtService;
     private final UserService userService;
+    private final RetailRegionService retailRegionService;
     private final FilesHandler filesHandler;
 
     // transactions ==================================================
@@ -95,5 +94,11 @@ public class BaseController {
     @GetMapping("/product/image/{imageName}")
     public Resource getProductImage(@PathVariable String imageName) {
         return FilesHandler.getFile(imageName);
+    }
+
+    // Retail ==================================================
+    @GetMapping("/retail-regions")
+    public List<RetailRegion> getRetails() {
+        return retailRegionService.getRetails();
     }
 }
