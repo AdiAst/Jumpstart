@@ -7,6 +7,7 @@ import com.aceadoratech.jumpstart.service.TransactionService;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,8 +19,8 @@ import java.io.IOException;
 @Slf4j
 @RestController
 @RequestMapping("/api/payment")
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
-@RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
+@AllArgsConstructor
 public class PaymentController {
     // services ==================================================
     private TransactionService transactionService;
@@ -28,17 +29,17 @@ public class PaymentController {
 
     // payments ==================================================
     @PostMapping("/pay")
-    public ResponseEntity<?> postPayment(@RequestBody PaymentRequest pay) {
+    public ResponseEntity<?> postPayment(@RequestBody PaymentRequest pay) throws PayPalRESTException {
         try {
             Payment payment = paymentService.payment(
                     pay.getTotal(),
                     "AUTHORIZE",
                     "Payment",
                     BASE_URL + "/canceled",
-                    BASE_URL + "success");
+                    BASE_URL + "/success");
 
             // add payment to transaction table
-            transactionService.createTransaction(pay.getTransactionalRequest());
+//            transactionService.createTransaction(pay.getTransactionalRequest());
 
             return ResponseEntity.ok().body(payment.getLinks().get(1).getHref());
         } catch (Exception exception) {
