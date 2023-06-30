@@ -78,8 +78,8 @@ public class BaseController {
         return productService.getProduct(slug);
     }
 
-    @GetMapping("/products")
-    public List<Product> getProductByQuery(@RequestParam String query) {
+    @GetMapping("/products/{query}")
+    public List<Product> getProductByQuery(@PathVariable String query) {
         return productService.getProductByQuery(query);
     }
 
