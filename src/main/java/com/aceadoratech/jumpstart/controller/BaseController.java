@@ -122,4 +122,9 @@ public class BaseController {
     public List<RetailRegion> getRetails() {
         return retailRegionService.getRetails();
     }
+
+    @GetMapping("/retail-regions-product/{id}")
+    public List<RetailRegionProduct> getRetailRegionProduct(@PathVariable Long id) {
+        return retailRegionService.getProductsByProductId(id);
+    }
 }
