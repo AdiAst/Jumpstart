@@ -36,7 +36,6 @@ public class AdministratorController {
     // products ==================================================
     @PostMapping("/product")
     public ResponseEntity<String> addProduct(@RequestBody Product productRequest) {
-        System.out.println(productRequest);
         // add the product using the productService
         Product product = productService.addProduct(productRequest);
         if(product == null)
@@ -45,10 +44,7 @@ public class AdministratorController {
         // return a successful response with an OK status code and success message
         return ResponseEntity.ok().body("Successfully added new product");
     }
-    @GetMapping("/konyot")
-    public ResponseEntity<String> a(){
-        return ResponseEntity.ok().body("aasdkasdnakndsn");
-    }
+
     @PutMapping("/product")
     public ResponseEntity<String> updateProduct(@RequestBody Product productRequest) {
         // add the product using the productService
@@ -57,7 +53,7 @@ public class AdministratorController {
             return new ResponseEntity<>(String.format("'%s' is exists", productRequest.getName()), HttpStatus.NOT_ACCEPTABLE);
 
         // return a successful response with an OK status code and success message
-        return ResponseEntity.ok().body("Successfully update new product");
+        return ResponseEntity.ok().body("Successfully update product");
     }
     @DeleteMapping("/product/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable Integer id){
@@ -78,10 +74,7 @@ public class AdministratorController {
 
 
     // retail regions  ==================================================
-    @GetMapping("/retail-regions")
-    public List<RetailRegion> getRetails() {
-        return retailRegionService.getRetails();
-    }
+
 
     @GetMapping("/retail-regions/{id}")
     public RetailRegion getRetail(@PathVariable Integer id) {
