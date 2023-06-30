@@ -55,6 +55,7 @@ public class AdministratorController {
         // return a successful response with an OK status code and success message
         return ResponseEntity.ok().body("Successfully update product");
     }
+
     @DeleteMapping("/product/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable Integer id){
         productService.deleteProduct(id);
