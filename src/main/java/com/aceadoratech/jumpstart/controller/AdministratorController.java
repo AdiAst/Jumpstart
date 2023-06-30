@@ -75,7 +75,10 @@ public class AdministratorController {
 
 
     // retail regions  ==================================================
-
+    @GetMapping("/retail-regions")
+    public List<RetailRegion> getRetails() {
+        return retailRegionService.getRetails();
+    }
 
     @GetMapping("/retail-regions/{id}")
     public RetailRegion getRetail(@PathVariable Integer id) {
@@ -104,7 +107,7 @@ public class AdministratorController {
     // retail regions products ==================================================
     @PostMapping("/retail-regions/product")
     public ResponseEntity<String> addProductToRetailRegion(@RequestBody RetailProductRequest retailProductRequest) {
-        RetailRegion retailRegion = retailRegionService.findById(retailProductRequest.getRetailId());
+        RetailRegion retailRegion = retailRegionService.getRetail(retailProductRequest.getRetailId());
         Product product = productService.getProduct(retailProductRequest.getProductId());
         RetailRegionProduct retailRegionProduct = new RetailRegionProduct();
         retailRegionProduct.setRetailRegion(retailRegion);
@@ -114,11 +117,14 @@ public class AdministratorController {
         return ResponseEntity.ok().body("Successfully add product to retail region");
     }
 
-    @GetMapping("/retail-regions/{retailRegionId}/products")
+    @GetMapping("/retail-regions/{retailRegionId}/retails")
     public List<RetailRegionProduct> getProductsByRetailRegionId(@PathVariable Long retailRegionId) {
         return retailRegionService.getProductsByRetailRegionId(retailRegionId);
     }
-
+    @GetMapping("/retail-regions/{productId}/products")
+    public List<RetailRegionProduct> getProductsByProductId(@PathVariable Long productId) {
+        return retailRegionService.getProductsByProductId(productId);
+    }
     // update retail products
     @PutMapping("/retail-regions/product")
     public ResponseEntity<?> updateRetailProducts(@RequestBody RetailRegionProduct retailRegionProduct) {
