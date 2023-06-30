@@ -96,9 +96,5 @@ public class BaseController {
         return FilesHandler.getFile(imageName);
     }
 
-    // Retail ==================================================
-    @GetMapping("/retail-regions")
-    public List<RetailRegion> getRetails() {
-        return retailRegionService.getRetails();
-    }
+
 }

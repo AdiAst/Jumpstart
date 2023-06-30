@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface RetailRegionProductRepository extends JpaRepository<RetailRegionProduct,Integer> {
+
     List<RetailRegionProduct> findByRetailRegionId(Long retailRegionId);
-
-
+    List<RetailRegionProduct> findByProductId(Long productId);
 }
