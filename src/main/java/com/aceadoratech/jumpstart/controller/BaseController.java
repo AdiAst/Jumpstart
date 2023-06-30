@@ -14,14 +14,19 @@ import com.aceadoratech.jumpstart.utils.FilesHandler;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.apache.tomcat.util.json.JSONFilter;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -96,5 +101,25 @@ public class BaseController {
         return FilesHandler.getFile(imageName);
     }
 
+    @GetMapping(value = "/product/images", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getImages() throws IOException {
+        HashMap<String, ByteArrayResource> files = FilesHandler.getFiles();
+        HashMap<String, String> imageUrls = new HashMap<>();
 
+        for (String fileName : files.keySet()) {
+            ByteArrayResource resource = files.get(fileName);
+            byte[] fileData = resource.getByteArray();
+            String base64Data = Base64.getEncoder().encodeToString(fileData);
+            String imageUrl = "data:image/png;base64," + base64Data; // Modify the image format if necessary
+            imageUrls.put(fileName, imageUrl);
+        }
+
+        return ResponseEntity.ok(imageUrls);
+    }
+
+    // Retail ==================================================
+    @GetMapping("/retail-regions")
+    public List<RetailRegion> getRetails() {
+        return retailRegionService.getRetails();
+    }
 }

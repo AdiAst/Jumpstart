@@ -24,7 +24,7 @@ public class SecurityConfiguration {
                 .csrf().disable()
                 .authorizeHttpRequests()
 //                    .requestMatchers("/api/base/**").hasAnyRole("ADMIN", "CUSTOMER")
-                    .requestMatchers("/api/admin/**").hasAnyRole("ADMIN")
+                    .requestMatchers("/api/admin/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .sessionManagement()

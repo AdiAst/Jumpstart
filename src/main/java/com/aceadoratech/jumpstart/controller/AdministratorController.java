@@ -63,16 +63,18 @@ public class AdministratorController {
     }
 
     @PostMapping("/product/image")
-    public ResponseEntity<?> postProductImage(@RequestParam("image") MultipartFile image) throws IOException {
+    public ResponseEntity<?> postProductImage(
+            @RequestParam("image") MultipartFile image,
+            @RequestParam("customName") String customName
+    ) throws IOException {
         // check if image size lower than 2MB
         if(image.getSize() > 2000000) return ResponseEntity.ok("Image size cannot more than 2MB");
-        String imageName = StringUtils.cleanPath(image.getOriginalFilename());
+        String imageName = StringUtils.cleanPath(customName);
         String dir = "storage/images/"; // store to local directory
         filesHandler.saveFile(dir, imageName, image); // write the image
 
         return ResponseEntity.ok().body("Image added to storage");
     }
-
 
     // retail regions  ==================================================
     @GetMapping("/retail-regions")
@@ -149,5 +151,4 @@ public class AdministratorController {
         transactionService.approveTransaction(id);
         return ResponseEntity.ok().body("Successfully approve a product");
     }
-
 }
