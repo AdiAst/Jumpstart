@@ -22,11 +22,13 @@ public class SecurityConfiguration {
         http
                 .cors().and()
                 .csrf().disable()
-                .authorizeHttpRequests().requestMatchers("/api/base/**")
-                .permitAll()
-                .anyRequest().authenticated()
+                .authorizeHttpRequests()
+//                    .requestMatchers("/api/base/**").hasAnyRole("ADMIN", "CUSTOMER")
+                    .requestMatchers("/api/admin/**").hasAnyRole("ADMIN")
+                .anyRequest().permitAll()
                 .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
