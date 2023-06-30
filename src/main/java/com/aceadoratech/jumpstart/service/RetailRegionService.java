@@ -18,13 +18,13 @@ public class RetailRegionService {
     public List<RetailRegionProduct> getProductsByRetailRegionId(Long retailRegionId) {
         return retailRegionProductRepository.findByRetailRegionId(retailRegionId);
     }
-
+    public List<RetailRegionProduct> getProductsByProductId(Long productId) {
+        return retailRegionProductRepository.findByProductId(productId);
+    }
     public RetailRegionProduct addProductToRetailRegion(RetailRegionProduct retailRegionProduct) {
         return retailRegionProductRepository.save(retailRegionProduct);
     }
-    public RetailRegion findById(Integer id){
-        return retailRegionRepository.findById(id).get();
-    }
+
 
     public RetailRegion addRetailRegion(RetailRegion retailRegion) {
         return retailRegionRepository.save(retailRegion);
@@ -54,6 +54,7 @@ public class RetailRegionService {
         retailRegionProduct.setProduct(rrp.getProduct());
         retailRegionProduct.setStock(rrp.getStock());
         retailRegionProduct.setRetailRegion(rrp.getRetailRegion());
+        retailRegionProductRepository.save(retailRegionProduct);
     }
 
     public void deleteProduct(Integer id) {
