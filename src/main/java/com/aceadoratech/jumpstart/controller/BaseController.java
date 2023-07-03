@@ -78,8 +78,8 @@ public class BaseController {
         return productService.getProduct(slug);
     }
 
-    @GetMapping("/products")
-    public List<Product> getProductByQuery(@RequestParam String query) {
+    @GetMapping("/products/{query}")
+    public List<Product> getProductByQuery(@PathVariable String query) {
         return productService.getProductByQuery(query);
     }
 
@@ -121,5 +121,10 @@ public class BaseController {
     @GetMapping("/retail-regions")
     public List<RetailRegion> getRetails() {
         return retailRegionService.getRetails();
+    }
+
+    @GetMapping("/retail-regions-product/{id}")
+    public List<RetailRegionProduct> getRetailRegionProduct(@PathVariable Long id) {
+        return retailRegionService.getProductsByProductId(id);
     }
 }

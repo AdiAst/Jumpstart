@@ -38,11 +38,15 @@ public class ProductService {
     public List<Product> getAll(){
         return repository.findAll();
     }
+
     public boolean deleteProduct(Integer id){repository.deleteById(id);return true;}
+
     public Product getProduct(String slug) {
         return repository.findBySlug(slug);
     }
+
     public Product getProduct(Integer id){return repository.findById(id).get();}
+
     public List<Product> getProductByQuery(String query) {
         return repository.findByQuery(query);
     }
