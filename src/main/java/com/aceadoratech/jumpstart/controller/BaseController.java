@@ -47,7 +47,7 @@ public class BaseController {
     // transactions ==================================================
     @PostMapping("/transaction")
     public ResponseEntity<String> postTransaction(@RequestBody TransactionalRequest transactionalRequest) {
-
+        System.out.println(transactionalRequest);
         // Call the transactionService to create the transaction
         boolean created = transactionService.createTransaction(transactionalRequest);
 

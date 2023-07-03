@@ -1,9 +1,6 @@
 package com.aceadoratech.jumpstart.controller;
 
-import com.aceadoratech.jumpstart.entity.Product;
-import com.aceadoratech.jumpstart.entity.RetailRegion;
-import com.aceadoratech.jumpstart.entity.RetailRegionProduct;
-import com.aceadoratech.jumpstart.entity.Transaction;
+import com.aceadoratech.jumpstart.entity.*;
 import com.aceadoratech.jumpstart.exchanges.ProductRequest;
 import com.aceadoratech.jumpstart.exchanges.RetailProductRequest;
 import com.aceadoratech.jumpstart.service.ProductService;
@@ -57,8 +54,15 @@ public class AdministratorController {
     }
 
     @DeleteMapping("/product/{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable Integer id){
+    public ResponseEntity<String> deleteProduct(@PathVariable Integer id) {
+        List<RetailRegionProduct> retailRegionProducts = retailRegionService.getProductsByProductId(id.longValue());
+
+        for (RetailRegionProduct retailRegionProduct : retailRegionProducts) {
+            retailRegionService.deleteProduct(retailRegionProduct.getId());
+        }
+
         productService.deleteProduct(id);
+
         return ResponseEntity.ok().body("Successfully delete product");
     }
 
@@ -146,7 +150,11 @@ public class AdministratorController {
         // Retrieve all transaction using the transactionService
         return transactionService.getAll();
     }
-    @PostMapping("/transaction/approve/{id}")
+    @GetMapping("/transaction/{status}")
+    public List<Transaction> getTransactionByStatus(@PathVariable Status status){
+        return transactionService.getByStatus(status);
+    }
+    @GetMapping("/transaction/approve/{id}")
     public ResponseEntity<String> approveTransaction(@PathVariable Integer id){
         transactionService.approveTransaction(id);
         return ResponseEntity.ok().body("Successfully approve a product");

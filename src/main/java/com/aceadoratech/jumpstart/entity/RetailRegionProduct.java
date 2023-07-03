@@ -20,11 +20,11 @@ public class RetailRegionProduct {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "retail_region_id")
+    @JoinColumn(name = "retail_region_id", nullable = true)
     private RetailRegion retailRegion;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", nullable = true)
     private Product product;
 
     private int stock;

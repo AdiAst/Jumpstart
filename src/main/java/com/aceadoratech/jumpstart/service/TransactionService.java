@@ -58,7 +58,9 @@ public class TransactionService {
             return false;
         }
     }
-
+    public List<Transaction> getByStatus(Status status){
+        return transactionRepository.findByStatus(status);
+    }
     public Transaction getTransaction(int id) {
         return transactionRepository.findById(id).get();
     }
